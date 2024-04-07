@@ -6,6 +6,12 @@
 <body>
 <h1>Hello VLAD! </h1><hr>
 <h4>from all country</h4>
+<form action="/" method="get">
+    Seaching for name of product: <input type="text" name="title"> <br>
+    <input type="submit" value="search"/>
+</form>
+
+
 <#list products as product>
 <div>
     <p><b>${product.title}</b> ${product.price} | <a href="/product/${product.id}">details.... </a> </p>
