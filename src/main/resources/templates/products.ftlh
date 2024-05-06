@@ -4,7 +4,18 @@
     <title>BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL | <a href="/login">LogIn</a></h1><hr>
+<h1>BUYSELL <h1>
+        <#if user.email?? >
+        <h3>name: <i>${user.name}</i></h3>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input type="submit" value="Exit"/>
+            </form>
+            <#else>
+        <a href="/login">LogIn</a></h1>
+        </#if>
+<hr>
+form
 <h4>From all Poland</h4>
 <form action="/" method="get">
     searching: <input type="text" name="title"><br>
@@ -17,8 +28,9 @@
     <#else>
     <h3>No</h3>
 </#list>
-<hr>
-<h3>Create</h3>
+<#if user.email??>
+    <hr>
+    <h3>Create</h3>
 <form action="/product/create" method="post" enctype="multipart/form-data">
     Name of position: <input type="text" name="title"/><br><br>
     Description: <input type="text" name="description"/><br><br>
@@ -31,5 +43,6 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="add"/>
 </form>
+</#if>
 </body>
 </html>

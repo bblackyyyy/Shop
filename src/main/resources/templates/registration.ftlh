@@ -14,6 +14,8 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="LogIn"/>
 </form>
-
+<#if errorMessage??>
+    <h2 style="color: red">${errorMessage}</h2>
+</#if>
 </body>
 </html>

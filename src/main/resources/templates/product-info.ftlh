@@ -13,7 +13,8 @@
 <b>descriprion: </b>${product.description}<br>
 <b>Price: </b>${product.price}<br>
 <b>Town: </b>${product.city}<br>
-<b>Author: </b>${product.author}<br>
+<b>Author: </b>${product.user.name}<br>
+<b>Phone number: </b>${product.user.numberPhone}<br>
 <hr>
 <form action="/product/delete/${product.id}" method="post">
     <input type="hidden" name="_csrf" value="${_csrf.token}">

@@ -10,7 +10,7 @@
     Email: <input type="email" name="username"><br><br>
     Password: <input type="password" name="password"><br><br>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <input type="submit" value="Вход"/>
+    <input type="submit" value="Loggined In"/>
 </form>
 <a href="/registration">Regin</a>
 </body>
