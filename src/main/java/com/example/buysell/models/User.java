@@ -53,6 +53,9 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
+    public boolean isAdmin(){
+        return roles.contains(Role.ROLE_ADMIN);
+    }
 
     @Override
     public boolean isAccountNonExpired() {
