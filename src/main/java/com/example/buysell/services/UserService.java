@@ -2,13 +2,13 @@ package com.example.buysell.services;
 
 import com.example.buysell.models.User;
 import com.example.buysell.models.enums.Role;
-import com.example.buysell.repositories.ProductRepository;
 import com.example.buysell.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -22,16 +22,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public boolean createUser(User user) {
-        String userEmail = user.getEmail();
-        if (userRepository.findByEmail(userEmail) != null) return false;
+        String email = user.getEmail();
+        if (userRepository.findByEmail(email) != null) return false;
         user.setActive(true);
-        user.getRoles().add(Role.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        log.info("Saving new User with email: {}", userEmail);
+        user.getRoles().add(Role.ROLE_USER);
+        log.info("Saving new User with email: {}", email);
         userRepository.save(user);
         return true;
+    }
+
+    public List<User> list() {
+        return userRepository.findAll();
     }
 
     public void banUser(Long id) {
@@ -61,10 +64,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<User> list() {
-        return userRepository.findAll();
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepository.findByEmail(principal.getName());
     }
-
-
-
 }
